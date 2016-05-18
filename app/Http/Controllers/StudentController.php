@@ -30,8 +30,12 @@ class StudentController extends Controller
 
     }
 
-    public function indexData($age1, $age2)
+    public function indexData(Request $request)
     {
+        $age1 = $request->age1;
+        $age2 = $request->age2;
+
+
         $student = Student::join('sections','students.section_id', '=' , 'sections.id')
             ->join('levels','students.level_id', '=' , 'levels.id')
             ->whereBetween('students.age',[$age1,$age2])

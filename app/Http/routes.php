@@ -43,4 +43,4 @@ Route::get('/students/report/{age1}/{age2}', ['as' => 'student.report' , 'uses' 
 
 
 Route::get('/students', ['as' => 'student.manage' , 'uses' => 'StudentController@index']);
-Route::get('/students/data/{age1}/{age2}', ['as' => 'student.data' , 'uses' => 'StudentController@indexData']);
+Route::post('/students/data', ['as' => 'student.data' , 'uses' => 'StudentController@indexData']);

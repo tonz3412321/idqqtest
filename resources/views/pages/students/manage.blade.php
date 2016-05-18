@@ -108,8 +108,7 @@
             $('.ages').change(function(){
 
                 $('#students').dataTable().fnDestroy();
-                $url = '/students/data/'+$('#age1').val()+'/'+$('#age2').val();
-                studentsTable($url);
+                studentsTable();
 
 
             });
@@ -126,13 +125,20 @@
             {
                 if($url==null)
                 {
-                    $url = '/students/data/1/100';
+                    $url = "{{ route('student.data') }}";
                 }
+
+                var $age1 = $('#age1').val();
+                var $age2 = $('#age2').val();
 
                 $('#students').DataTable({
                     processing: true,
                     serverSide: true,
-                    ajax: $url,
+                    "ajax": {
+                        "url": $url,
+                        "type": "POST",
+                        "data": {  _token: $('[name="_token"]').attr('content'), age1:$age1 , age2:$age2 }
+                    },
                     columns: [
                         {"name": "id", "orderable": "true"},
                         {"name": "last_name", "orderable": "true"},
